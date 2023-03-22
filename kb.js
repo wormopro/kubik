@@ -1,7 +1,8 @@
 let kosti = [];
 let walks = localStorage.getItem("walks");
 let dice = [];
-
+let chance = [];// масив шщанса
+let randDice;  //рандомный куб для шанса
 
 //[Начало] Создать игроков 
 let countPlayers = +localStorage.getItem('countPlayers');
@@ -36,9 +37,9 @@ brosit.addEventListener('click', () => {
     dice[i] = randomInteger(1, 6); //создается случайный масив 
     document.querySelector(`#kub${i + 1}`).innerHTML = dice[i]; //добавляем в кнопки хтмл значение масива
     kosti[i] = document.querySelector(`#kub${i + 1}`); //создаем масив с елементами dom 
-
+ console.log(dice[i]);
   }
-  console.log(dice);
+ 
   console.log(kosti);
 
 });
@@ -209,127 +210,177 @@ function randomInteger(min, max) {
 }
 
 //Счетчик очков
-function arrayFilter(arrayFilter) {
+function arrayFilter(array) {
   //Количиство совпадений
   function kubFilter(arrayKub, num) {
     let arrayKubFilter = arrayKub.filter(a => a == num);
-    return arrayKubFilter.length;
+    return arrayKubFilter.length;//Функцыя возвращает  масив совпадений
   }
+
+
+  for(i = 1; i  < 7; i++){
+    if (kubFilter(array, i) == 2 && dice[ i!= (1 && 5)])  {//если значение массива повторяется 2 раза и не равняется 1 и 5 
+      alert('hiyh');
+    }
+  }
+
 
   let result = 0;
   // проверки на "1" [?][?][?][?][?]
-  if (kubFilter(arrayFilter, 1) == 1) {
+  if (kubFilter(array, 1) == 1) {
     alert("10");
     result += 10;
   }
-  if (kubFilter(arrayFilter, 1) == 2) {
+  if (kubFilter(array, 1) == 2) {
     alert("20");
     result += 20;
   }
-  if (kubFilter(arrayFilter, 1) == 3) {
+  if (kubFilter(array, 1) == 3) {
     alert("100");
     result += 100;
   }
-  if (kubFilter(arrayFilter, 1) == 4) {
+  if (kubFilter(array, 1) == 4) {
     alert("200");
     result += 200;
   }
-  if (kubFilter(arrayFilter, 1) == 5) {
+  if (kubFilter(array, 1) == 5) {
     alert("1000");
     result += 1000;
   }
   // проверки на "5" [?][?][?][?][?]
-  if (kubFilter(arrayFilter, 5) == 1) {
+  if (kubFilter(array, 5) == 1) {
     alert("5");
     result += 5;
   }
-  if (kubFilter(arrayFilter, 5) == 2) {
+  if (kubFilter(array, 5) == 2) {
     alert("10");
     result += 10;
   }
-  if (kubFilter(arrayFilter, 5) == 3) {
+  if (kubFilter(array, 5) == 3) {
     alert("50");
     result += 50;
   }
-  if (kubFilter(arrayFilter, 5) == 4) {
+  if (kubFilter(array, 5) == 4) {
     alert("100");
     result += 100;
   }
-  if (kubFilter(arrayFilter, 5) == 5) {
+  if (kubFilter(array, 5) == 5) {
     alert("500");
     result += 500;
   }
   // проверки на "2" [?][?][?][?][?]
-  if (kubFilter(arrayFilter, 2) == 3) {
+  if (kubFilter(array, 2) == 3) {
     alert("20");
     result += 20;
   }
-  if (kubFilter(arrayFilter, 2) == 4) {
+  if (kubFilter(array, 2) == 4) {
     alert("40");
     result += 40;
   }
-  if (kubFilter(arrayFilter, 2) == 5) {
+  if (kubFilter(array, 2) == 5) {
     alert("200");
     result += 200;
   }
   // проверки на "3" [?][?][?][?][?]
-  if (kubFilter(arrayFilter, 3) == 3) {
+  if (kubFilter(array, 3) == 3) {
     alert("30");
     result += 30;
   }
-  if (kubFilter(arrayFilter, 3) == 4) {
+  if (kubFilter(array, 3) == 4) {
     alert("60");
     result += 60;
   }
-  if (kubFilter(arrayFilter, 3) == 5) {
+  if (kubFilter(array, 3) == 5) {
     alert("300");
     result += 300;
   }
   // проверки на "4" [?][?][?][?][?]
-  if (kubFilter(arrayFilter, 4) == 3) {
+  if (kubFilter(array, 4) == 3) {
     alert("40");
     result += 40;
   }
-  if (kubFilter(arrayFilter, 4) == 4) {
+  if (kubFilter(array, 4) == 4) {
     alert("80");
     result += 80;
   }
-  if (kubFilter(arrayFilter, 4) == 5) {
+  if (kubFilter(array, 4) == 5) {
     alert("400");
     result += 400;
   }
   // проверки на "6" [?][?][?][?][?]
-  if (kubFilter(arrayFilter, 6) == 3) {
+  if (kubFilter(array, 6) == 3) {
     alert("60");
     result += 60;
   }
-  if (kubFilter(arrayFilter, 6) == 4) {
+  if (kubFilter(array, 6) == 4) {
     alert("120");
     result += 120;
   }
-  if (kubFilter(arrayFilter, 6) == 5) {
+  if (kubFilter(array, 6) == 5) {
     alert("600");
     result += 600;
   }
 
   //проверка12345
-  if (arrayFilter.some(bone => bone == 1) && //Помоги запихнуть это в цыкл
-    arrayFilter.some(bone => bone == 2) &&
-    arrayFilter.some(bone => bone == 3) &&
-    arrayFilter.some(bone => bone == 4) &&
-    arrayFilter.some(bone => bone == 5)) {
+  if (array.some(bone => bone == 1) && //Помоги запихнуть это в цыкл
+    array.some(bone => bone == 2) &&
+    array.some(bone => bone == 3) &&
+    array.some(bone => bone == 4) &&
+    array.some(bone => bone == 5)) {
     result += 150;
   }
 
-  if (arrayFilter.some(bone => bone == 6) && //Помоги запихнуть это в цыкл
-    arrayFilter.some(bone => bone == 2) &&
-    arrayFilter.some(bone => bone == 3) &&
-    arrayFilter.some(bone => bone == 4) &&
-    arrayFilter.some(bone => bone == 5)) {
+  if (array.some(bone => bone == 6) && //Помоги запихнуть это в цыкл
+    array.some(bone => bone == 2) &&
+    array.some(bone => bone == 3) &&
+    array.some(bone => bone == 4) &&
+    array.some(bone => bone == 5)) {
     result += 250;
   }
 
-  let boneStat = {}; //ассоциативный массив значение: сколько раз выпало
+  
+//Код шанса
+if(array.some(bone => bone == 1) || array.some(bone => bone == 5)) { 
+  //если в масиве есть 1 или 5 шанс не работает! код дальше не выполняется
+}else{
+  for(i = 1;i < 7;i++){ //проверяем на количество совпадений значуний кубмка от 1 до 6
+    {
+      if(kubFilter(array,i) == 2){// если нашло  совпадения 
+        alert(i);
+        chance.push(i); //добавляем совпадкние в масив шанса
+    };
+     
+      
+    };
+  };
+};
+
+
+  
+  if(chance.length == 2 ){ //если в масиве шанс 2 значения то это и есть шанс
+
+    alert('Шанс! Испытай удачу');
+    randDice = randomInteger(1,6); //кидаем последний кубик что бы сыграл шанс 
+    chance.push(randDice); //добавляем его в масив шанса
+    alert(chance);
+    for(i = 1;i < 7;i++){
+      {
+        if(kubFilter(chance,i) == 2){// если комбинация совпадает 
+          alert('Ура')
+         result  += i*10; // добавляем очки в результат
+         
+      };
+       
+        
+      };
+    };
+    
+  }
+ 
+  return result;
+}
+
+/* let boneStat = {}; //ассоциативный массив значение: сколько раз выпало
 
   //функция создания boneStat
   function boneCalc(arr) {
@@ -339,8 +390,7 @@ function arrayFilter(arrayFilter) {
       else boneStat[arr[i]] = 1;
     }
   }
-
-  boneCalc(arrayFilter);
+ boneCalc(arrayFilter);
 
   let chance = []; // Создание пустого массива chance
   for (let key in boneStat) { // Итерация по всем свойствам объекта boneStat
@@ -355,6 +405,13 @@ function arrayFilter(arrayFilter) {
       }
     }
     alert(chance.join(", ")); // Выводим на экран строку, в которой элементы массива chance объединены запятыми и пробелами
+  } */
+/* for(i = 1; i  < 7; i++){
+  if (kubFilter(arrayFilter, dice[i]) == 2 && dice[ i!= (1 && 5)])  {//если значение массива повторяется 2 раза и не равняется 1 и 5 
+    for(j = 1; i  < 7; j++){
+      if (kubFilter(arrayFilter, dice[j != i]) == 2 && dice[ i!= (1 && 5)]) {//то мы проверяем 2е значение масива которое не равняется 1му и тоже повторяется 2 раза
+
+      } 
+    }
   }
-  return result;
-}
+} */
