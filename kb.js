@@ -1,7 +1,8 @@
 let kosti = [];
 let walks = localStorage.getItem("walks");
 let dice = [];
-// коммит для миси
+// коммит для мисиhghg
+
 //[Начало] Создать игроков 
 let countPlayers = +localStorage.getItem('countPlayers');
 if(countPlayers == 0){
