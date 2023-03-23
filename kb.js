@@ -77,6 +77,7 @@ save.addEventListener('click', () => {
       kosti[2].dataset.status == 2 && kosti[3].dataset.status == 2 &&
       kosti[4].dataset.status == 2) {
       document.location.reload();
+      document.querySelector('#countPlayer').innerHTML = jsonObjPlayers[`player${localStorage.getItem('walks')}`].name;
     };
   };
 
@@ -95,7 +96,7 @@ save.addEventListener('click', () => {
     console.log('на бочке true');
   }
   console.log(calcTotalScore, 'Общий счет score и playerScore');
-  document.querySelector('#score').innerHTML = score;
+  document.querySelector('#score').innerHTML = localStorage.getItem('score');
   document.querySelector('#countPlayer').innerHTML = jsonObjPlayers[`player${localStorage.getItem('walks')}`].name;
 });
 
@@ -145,7 +146,7 @@ finish.addEventListener('click', () => {
       document.location.reload(); //перезагрузить страницу
     }
   };
-  document.querySelector('#countPlayer').innerHTML = localStorage.getItem('name');
+
 });
 
 //Ничего не выпало
@@ -168,7 +169,7 @@ for (let i = 0; i < 5; i++) {
   });
 };
 
-document.querySelector('#score').innerHTML = localStorage.getItem('score');
+
 //Насобирал игрок нужное количество очков или нет? (В игре или нет)
 function inGame() {
   //Получить из памяти всех игроков в JSON формате
@@ -226,7 +227,71 @@ function arrayFilter(array) {
 
 
   let result = 0;
-  // проверки на "1" [?][?][?][?][?]
+
+  //проверка12345
+  if (array.some(bone => bone == 1) && //Помоги запихнуть это в цыкл
+    array.some(bone => bone == 2) &&
+    array.some(bone => bone == 3) &&
+    array.some(bone => bone == 4) &&
+    array.some(bone => bone == 5)) {
+      alert("150");
+    result += 150;
+  }else if (kubFilter(array, 1) == 1) {
+    alert("10");
+    result += 10;
+  }
+
+  if (array.some(bone => bone == 6) && //Помоги запихнуть это в цыкл
+    array.some(bone => bone == 2) &&
+    array.some(bone => bone == 3) &&
+    array.some(bone => bone == 4) &&
+    array.some(bone => bone == 5)) {
+      alert("250");
+    result += 250;
+  }else if (kubFilter(array, 5) == 1) {
+    alert("5");
+    result += 5;
+  }
+  
+for (i=1; i<=6; i++){
+      if (kubFilter(array, i==1) == 5) { 
+     alert("1000");
+    result += 1000;
+  }else
+       if (kubFilter(array, i) == 5) { 
+     alert(`${i}00`);
+    result += i*100;
+     }
+    
+    if (kubFilter(array, i==1) == 4) { 
+     alert("200");
+    result += 200;
+  }else
+       if (kubFilter(array, i) == 4) { 
+     alert(i*20);
+    result += i*20;
+     }
+    
+    if (kubFilter(array, i==1) == 3) { 
+      alert("100");
+     result += 100;
+   }else
+        if (kubFilter(array, i) == 3) { 
+      alert(i*10);
+     result += i*10;
+      }
+  }
+  if (kubFilter(array, 1) == 2) {
+    alert("20");
+    result += 20;
+  }
+  if (kubFilter(array, 5) == 2) {
+      alert("10");
+      result += 10;
+    }
+  
+    
+  /* // проверки на "1" [?][?][?][?][?]
   if (kubFilter(array, 1) == 1) {
     alert("10");
     result += 10;
@@ -319,24 +384,9 @@ function arrayFilter(array) {
   if (kubFilter(array, 6) == 5) {
     alert("600");
     result += 600;
-  }
+  } */
 
-  //проверка12345
-  if (array.some(bone => bone == 1) && //Помоги запихнуть это в цыкл
-    array.some(bone => bone == 2) &&
-    array.some(bone => bone == 3) &&
-    array.some(bone => bone == 4) &&
-    array.some(bone => bone == 5)) {
-    result += 150;
-  }
-
-  if (array.some(bone => bone == 6) && //Помоги запихнуть это в цыкл
-    array.some(bone => bone == 2) &&
-    array.some(bone => bone == 3) &&
-    array.some(bone => bone == 4) &&
-    array.some(bone => bone == 5)) {
-    result += 250;
-  }
+  
 
   
 //Код шанса
