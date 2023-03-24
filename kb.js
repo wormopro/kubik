@@ -225,7 +225,6 @@ function arrayFilter(array) {
     }
   }
 
-
   let result = 0;
 
   //проверка12345
