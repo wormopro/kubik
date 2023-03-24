@@ -219,7 +219,7 @@ function arrayFilter(array) {
   }
 
 
-  for(i = 1; i  < 7; i++){
+  for(i = 1; i < 7; i++){
     if (kubFilter(array, i) == 2 && dice[ i!= (1 && 5)])  {//если значение массива повторяется 2 раза и не равняется 1 и 5 
       alert('hiyh');
     }
@@ -229,7 +229,7 @@ function arrayFilter(array) {
   let result = 0;
 
   //проверка12345
-  if (array.some(bone => bone == 1) && //Помоги запихнуть это в цыкл
+  if (array.some(bone => bone == 1) &&
     array.some(bone => bone == 2) &&
     array.some(bone => bone == 3) &&
     array.some(bone => bone == 4) &&
@@ -241,12 +241,12 @@ function arrayFilter(array) {
     result += 10;
   }
 
-  if (array.some(bone => bone == 6) && //Помоги запихнуть это в цыкл
+  if (array.some(bone => bone == 6) &&
     array.some(bone => bone == 2) &&
     array.some(bone => bone == 3) &&
     array.some(bone => bone == 4) &&
     array.some(bone => bone == 5)) {
-      alert("250");
+    alert("250");
     result += 250;
   }else if (kubFilter(array, 5) == 1) {
     alert("5");
