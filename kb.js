@@ -397,24 +397,19 @@ if(array.some(bone => bone == 1) || array.some(bone => bone == 5)) {
       if(kubFilter(array,i) == 2){// если нашло  совпадения 
         alert(i);
         chance.push(i); //добавляем совпадкние в масив шанса
-    };
-     
-      
+    };     
     };
   };
 };
 
-
-  
-  if(chance.length == 2 ){ //если в масиве шанс 2 значения то это и есть шанс
-
-    alert('Шанс! Испытай удачу');
-    randDice = randomInteger(1,6); //кидаем последний кубик что бы сыграл шанс 
-    chance.push(randDice); //добавляем его в масив шанса
-    alert(chance);
-    for(i = 1;i < 7;i++){
-      {
-        if(kubFilter(chance,i) == 2){// если комбинация совпадает 
+if(chance.length == 2 ){ //если в масиве шанс 2 значения то это и есть шанс
+  alert('Шанс! Испытай удачу');
+  randDice = randomInteger(1,6); //кидаем последний кубик что бы сыграл шанс 
+  chance.push(randDice); //добавляем его в масив шанса
+  alert(chance);
+  for(i = 1;i < 7;i++){
+    {
+      if(kubFilter(chance,i) == 2){// если комбинация совпадает 
           alert('Ура')
          result  += i*10; // добавляем очки в результат
          
@@ -425,7 +420,6 @@ if(array.some(bone => bone == 1) || array.some(bone => bone == 5)) {
     };
     
   }
- 
   return result;
 }
 
