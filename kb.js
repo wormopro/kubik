@@ -234,8 +234,9 @@ function arrayFilter(array) {
     array.some(bone => bone == 4) &&
     array.some(bone => bone == 5)) {
       alert("150");
-    result += 150;
-  }else if (kubFilter(array, 1) == 1) {
+      result += 150;
+  }
+  else if (kubFilter(array, 1) == 1) {
     alert("10");
     result += 10;
   }
