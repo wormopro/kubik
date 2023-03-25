@@ -65,7 +65,7 @@ save.addEventListener('click', () => {
   } else {
     localStorage.setItem('score', score); //Записать очки если null
   }
-  scoree();// выводит счет на данный момент
+  
   //меняет статус кубика с 1 на 2
   for (let i = 0; i < 5; i++) {
     kosti[i] = document.querySelector(`#kub${i+1}`);
@@ -218,11 +218,6 @@ function randomInteger(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
 }
-
-//Накиданый счет на даный момент
-function scoree(){
-  return document.querySelector('#score').innerHTML = localStorage.getItem('score');
-};
 
 //Счетчик очков
 function arrayFilter(array) {

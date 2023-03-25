@@ -23,14 +23,14 @@ div[data-status="2"]{
     text-shadow: -1px -1px 0px black, 0 0 1em white, -1px -2px 2px blue;
 }
 
-#numPlayer{
-    font-size: 30px;
+#countPlayer{
+    font-size: 25px;
     color: rgb(105, 105, 105);
-    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+    text-shadow: 1px 1px 2px rgb(0, 255, 128), 0 0 1em blue, 0 0 0.2em blue;
 }
 
 #score{
-    font-size: 30px;
+    font-size: 25px;
     color: rgb(105, 105, 105);
     text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;  
 }
