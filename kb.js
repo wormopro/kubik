@@ -34,11 +34,14 @@ nameScorePlayers(param = 1); //выводит имя игрока и счет н
 let brosit = document.querySelector('#brosit');
 brosit.addEventListener('click', () => {
   for (let i = 0; i < 5; i++) {
+    if (kosti[i].dataset.status != 2) {//проверяет есть ли сыграные кубы если есть ничего не записывает
     dice[i] = randomInteger(1, 6); //создается случайный масив 
+    
     document.querySelector(`#kub${i + 1}`).innerHTML = dice[i]; //добавляем в кнопки хтмл значение масива
     kosti[i] = document.querySelector(`#kub${i + 1}`); //создаем масив с елементами dom 
  console.log(dice[i]);
   }
+}
  
   console.log(kosti);
   nameScorePlayers(param = 1); //выводит имя игрока и счет на данный момент 
@@ -55,7 +58,7 @@ save.addEventListener('click', () => {
     };
   };
   let score = arrayFilter(setCube); //Подсчитать очки
-  
+  if (score != 0){
   //Отвечает за score в памяти
   if (localStorage.getItem('score')) {
     let scoreInMemory = +localStorage.getItem('score'); //Очки в памяти
@@ -80,6 +83,7 @@ save.addEventListener('click', () => {
       
     };
   };
+};
 
   //Бочка
   let jsonObjPlayers = JSON.parse(localStorage.getItem('players')); //достать из памяти (players "JsonString") и сделать обектом
@@ -245,22 +249,24 @@ function arrayFilter(array) {
       alert("150");
       result += 150;
   }
-  else if (kubFilter(array, 1) == 1) {
-    alert("10");
-    result += 10;
-  }
-
-  if (array.some(bone => bone == 6) &&
+ else if (array.some(bone => bone == 6) &&
     array.some(bone => bone == 2) &&
     array.some(bone => bone == 3) &&
     array.some(bone => bone == 4) &&
     array.some(bone => bone == 5)) {
     alert("250");
     result += 250;
-  }else if (kubFilter(array, 5) == 1) {
+  }
+  else if (kubFilter(array, 5) == 1) {
     alert("5");
     result += 5;
   }
+  else if (kubFilter(array, 1) == 1) {
+    alert("10");
+    result += 10;
+  }
+
+  
   
 for (i=1; i<=6; i++){
     if (kubFilter(array, i==1) == 5) { 
@@ -301,7 +307,7 @@ for (i=1; i<=6; i++){
      
   
 //Код шанса
-if(array.some(bone => bone == 1) || array.some(bone => bone == 5)) { 
+if(dice.some(bone => bone == 1) || dice.some(bone => bone == 5)) { 
   //если в масиве есть 1 или 5 шанс не работает! код дальше не выполняется
 }else{
   for(i = 1;i < 7;i++){ //проверяем на количество совпадений значуний кубмка от 1 до 6
@@ -319,10 +325,13 @@ if(chance.length == 2 ){ //если в масиве шанс 2 значения 
   randDice = randomInteger(1,6); //кидаем последний кубик что бы сыграл шанс 
   chance.push(randDice); //добавляем его в масив шанса
   alert(chance);
+  let d = kosti[i].dataset.status == 0;
+  d.innerHTML = randDice
   for(i = 1;i < 7;i++){
     {
       if(kubFilter(chance,i) == 2){// если комбинация совпадает 
-          alert('Ура')
+          alert(`Ура + ${i*10}`)
+
          result  += i*10; // добавляем очки в результат
          
       };
