@@ -58,7 +58,7 @@ save.addEventListener('click', () => {
     };
   };
   let score = arrayFilter(setCube); //Подсчитать очки
-  if (score != 0){
+  if (score != 0){ //если набрал 0 очков ничего не делаем и кнопка не работает
   //Отвечает за score в памяти
   if (localStorage.getItem('score')) {
     let scoreInMemory = +localStorage.getItem('score'); //Очки в памяти
@@ -68,7 +68,7 @@ save.addEventListener('click', () => {
   } else {
     localStorage.setItem('score', score); //Записать очки если null
   }
-  
+
   //меняет статус кубика с 1 на 2
   for (let i = 0; i < 5; i++) {
     kosti[i] = document.querySelector(`#kub${i+1}`);
@@ -76,14 +76,17 @@ save.addEventListener('click', () => {
       kosti[i].dataset.status = 2;
     };
     //Если все кости в статусе 2 перезагрузка страницы
-    if (kosti[0].dataset.status == 2 && kosti[1].dataset.status == 2 &&
+    if (kosti.every(dice => dice.dataset.status == 2)){
+      document.location.reload();
+    }
+    /* if (kosti[0].dataset.status == 2 && kosti[1].dataset.status == 2 &&
       kosti[2].dataset.status == 2 && kosti[3].dataset.status == 2 &&
       kosti[4].dataset.status == 2) {
       document.location.reload();
       
+    }; */
     };
   };
-};
 
   //Бочка
   let jsonObjPlayers = JSON.parse(localStorage.getItem('players')); //достать из памяти (players "JsonString") и сделать обектом
@@ -247,14 +250,14 @@ function arrayFilter(array) {
     array.some(bone => bone == 4) &&
     array.some(bone => bone == 5)) {
       alert("150");
-      result += 150;
+    result += 150;
   }
  else if (array.some(bone => bone == 6) &&
     array.some(bone => bone == 2) &&
     array.some(bone => bone == 3) &&
     array.some(bone => bone == 4) &&
     array.some(bone => bone == 5)) {
-    alert("250");
+      alert("250");
     result += 250;
   }
   else if (kubFilter(array, 5) == 1) {
@@ -269,7 +272,7 @@ function arrayFilter(array) {
   
   
 for (i=1; i<=6; i++){
-    if (kubFilter(array, i==1) == 5) { 
+      if (kubFilter(array, i==1) == 5) { 
      alert("1000");
     result += 1000;
   }else
@@ -301,10 +304,10 @@ for (i=1; i<=6; i++){
     result += 20;
   }
   if (kubFilter(array, 5) == 2) {
-    alert("10");
-    result += 10;
+      alert("10");
+      result += 10;
   }
-     
+
   
 //Код шанса
 if(dice.some(bone => bone == 1) || dice.some(bone => bone == 5)) { 
@@ -315,28 +318,28 @@ if(dice.some(bone => bone == 1) || dice.some(bone => bone == 5)) {
       if(kubFilter(array,i) == 2){// если нашло  совпадения 
         alert(i);
         chance.push(i); //добавляем совпадкние в масив шанса
-    };     
+    };
     };
   };
 };
 
-if(chance.length == 2 ){ //если в масиве шанс 2 значения то это и есть шанс
-  alert('Шанс! Испытай удачу');
-  randDice = randomInteger(1,6); //кидаем последний кубик что бы сыграл шанс 
-  chance.push(randDice); //добавляем его в масив шанса
-  alert(chance);
+  if(chance.length == 2 ){ //если в масиве шанс 2 значения то это и есть шанс
+    alert('Шанс! Испытай удачу');
+    randDice = randomInteger(1,6); //кидаем последний кубик что бы сыграл шанс 
+    chance.push(randDice); //добавляем его в масив шанса
+    alert(chance);
   let d = kosti[i].dataset.status == 0;
   d.innerHTML = randDice
-  for(i = 1;i < 7;i++){
-    {
-      if(kubFilter(chance,i) == 2){// если комбинация совпадает 
+    for(i = 1;i < 7;i++){
+      {
+        if(kubFilter(chance,i) == 2){// если комбинация совпадает 
           alert(`Ура + ${i*10}`)
 
          result  += i*10; // добавляем очки в результат
          
       };
       };
-    };   
+    };
   }
   return result;
 }
