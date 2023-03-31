@@ -36,8 +36,7 @@ brosit.addEventListener('click', () => {
   for (let i = 0; i < 5; i++) {
     if (kosti[i].dataset.status != 2) {//проверяет есть ли сыграные кубы если есть ничего не записывает
     dice[i] = randomInteger(1, 6); //создается случайный масив 
-    
-    document.querySelector(`#kub${i + 1}`).innerHTML = `<img src='./images/${dice[i]}_dots.png'> ${dice[i]}`; //добавляем в кнопки хтмл значение масива
+    document.querySelector(`#kub${i + 1}`).innerHTML = dice[i]; //добавляем в кнопки хтмл значение масива
     kosti[i] = document.querySelector(`#kub${i + 1}`); //создаем масив с елементами dom 
  console.log(dice[i]);
   }
@@ -260,9 +259,10 @@ function arrayFilter(array) {
       alert("250");
     result += 250;
   }
-  else if (kubFilter(array, 5) == 1) {
+  else{ if (kubFilter(array, 5) == 1) {
     alert("5");
     result += 5;
+  }
     if (kubFilter(array, 1) == 1) {
       alert("10");
       result += 10;

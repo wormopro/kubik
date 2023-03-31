@@ -12,6 +12,10 @@ div[data-status="2"]{
     background-color: rgb(0, 167, 0);
 }
 
+#bones{
+    display: flex;
+    
+}
 #kub1,#kub2,#kub3,#kub4,#kub5{
     cursor: pointer;
     width: 20px;
