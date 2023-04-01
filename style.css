@@ -1,9 +1,9 @@
 div[data-status="0"],div[data-status="1"],div[data-status="2"]{
-    background-color: rgb(137, 199, 173);
     padding: 0 0 0 10px;
     margin: 3px;
-    font-size: 20px;
+    font-size: 0px;
 }
+
 
 div[data-status="1"]{
     background-color: rgb(187, 4, 4);
@@ -18,7 +18,34 @@ div[data-status="2"]{
 }
 #kub1,#kub2,#kub3,#kub4,#kub5{
     cursor: pointer;
+    position: absolute;
     width: 20px;
+    width: 115px;
+    height: 127px;
+    border-radius: 21px;
+    opacity: 0.2;
+}
+
+#kub1 {
+    left: 7px;
+    top: 6px;
+}
+#kub2{
+    left: 134px;
+    top: 7px;
+}
+
+#kub3{
+    left: 263px;
+    top: 7px;
+}
+#kub4{
+    left: 391px;
+    top: 7px;
+}
+#kub5{
+    left: 519px;
+    top: 7px;
 }
 
 #poinsScored{
