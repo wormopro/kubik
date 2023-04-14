@@ -3,6 +3,7 @@ let walks = localStorage.getItem("walks");
 let dice = [];
 let chance = [];// масив шщанса
 let randDice;  //рандомный куб для шанса
+let totalScore = document.querySelector("#totalScore");
 //[Начало] Создать игроков 
 let countPlayers = +localStorage.getItem('countPlayers');
 if (countPlayers == 0) {
@@ -29,7 +30,8 @@ if (countPlayers == 0) {
   window.location.reload();
 
 };
-nameScorePlayers(param = 1); //выводит имя игрока и счет на данный момент
+nameScorePlayers(totalScore); //выводит имя игрока и счет на данный момент
+
 //бросить 
 let brosit = document.querySelector('#brosit');
 brosit.addEventListener('click', () => {
@@ -45,7 +47,8 @@ brosit.addEventListener('click', () => {
 }
  
   console.log(kosti);
-  nameScorePlayers(param = 1); //выводит имя игрока и счет на данный момент 
+  nameScorePlayers(totalScore); //выводит имя игрока и счет на данный момент 
+  
 });
 
 //Сохранить
@@ -100,7 +103,7 @@ save.addEventListener('click', () => {
   }
   console.log(calcTotalScore, 'Общий счет score и playerScore');
   
-  nameScorePlayers(param = 1); //выводит имя игрока и счет на данный момент
+  nameScorePlayers(totalScore); //выводит имя игрока и счет на данный момент
 });
 
 //Закончить ход
@@ -183,14 +186,20 @@ for (let i = 0; i < 5; i++) {
 };
 
 //выводит имя и счет игрока
-function nameScorePlayers(param){
+function nameScorePlayers(bone){
   let jsonObjPlayers = JSON.parse(localStorage.getItem('players')); //достать из памяти (players "JsonString") и сделать обектом
   let name = document.querySelector('#countPlayer').innerHTML = jsonObjPlayers[`player${localStorage.getItem('walks')}`].name; //достать имя игрока
   let score = document.querySelector('#score').innerHTML = localStorage.getItem('score'); //достать счет
-  if(param == 1){
+  let out = '';
+    for (i = 1; i <= countPlayers; i++){ 
+      out += `<div>Общий счет игрока ${jsonObjPlayers[`player${i}`].name}: ${jsonObjPlayers[`player${i}`].score}</div>`;
+    
+    }
+    bone.innerHTML = out;
     return name,score;
-  };
+   
 };
+
 
 //Насобирал игрок нужное количество очков или нет? (В игре или нет)
 function inGame() {
