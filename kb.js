@@ -80,12 +80,7 @@ save.addEventListener('click', () => {
     if (kosti.every(dice => dice.dataset.status == 2)){
       document.location.reload();
     }
-    /* if (kosti[0].dataset.status == 2 && kosti[1].dataset.status == 2 &&
-      kosti[2].dataset.status == 2 && kosti[3].dataset.status == 2 &&
-      kosti[4].dataset.status == 2) {
-      document.location.reload();
-      
-    }; */
+
     };
   };
 
@@ -143,6 +138,16 @@ finish.addEventListener('click', () => {
   else {
     //изменить счет игрока в обекте (player{x})
     jsonObjPlayers[`player${walks}`].score += score;
+
+  //Скидывание игрока 
+    for (i = 1; i <= countPlayers; i++){ 
+      if(i != walks){ //Сравниваем что бы номер игрока не равнялся теккущему
+        if(jsonObjPlayers[`player${walks}`].score == jsonObjPlayers[`player${i}`].score){ //Если счет совпал
+          alert(`Вы скинули лоха ${jsonObjPlayers[`player${i}`].name}`); 
+          jsonObjPlayers[`player${i}`].score = 105; //Скидываем совпавшего игрока на 105
+        };
+      };  
+    };
     //Сделать обект (JSON 'строкой') и записать в память
     let jsonStringPlayers = localStorage.setItem('players', JSON.stringify(jsonObjPlayers));
     console.log(jsonStringPlayers);
@@ -261,17 +266,15 @@ function arrayFilter(array) {
       alert("250");
     result += 250;
   }
-  else if (kubFilter(array, 5) == 1) {
+  else{ if (kubFilter(array, 5) == 1) {
     alert("5");
     result += 5;
   }
-  else if (kubFilter(array, 1) == 1) {
-    alert("10");
-    result += 10;
+    if (kubFilter(array, 1) == 1) {
+      alert("10");
+      result += 10;
+    }
   }
-
-  
-  
 for (i=1; i<=6; i++){
       if (kubFilter(array, i==1) == 5) { 
      alert("1000");
