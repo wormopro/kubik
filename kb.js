@@ -342,8 +342,13 @@ if(dice.some(bone => bone == 1) || dice.some(bone => bone == 5)) {
     randDice = randomInteger(1,6); //кидаем последний кубик что бы сыграл шанс 
     chance.push(randDice); //добавляем его в масив шанса
     alert(chance);
-  let d = kosti[i].dataset.status == 0;
-  d.innerHTML = randDice
+    for (let i = 0; i < 5; i++) {
+      kosti[i] = document.querySelector(`#kub${i+1}`);
+        if (kosti[i].dataset.status == 0) {
+            kosti[i].dataset.status = 1;
+            document.getElementById(`myImage${i + 1}`).src=`./images/${dice[randDice]}_dots.png`; //Добавляет картинки кубики
+        }
+      }
     for(i = 1;i < 7;i++){
       {
         if(kubFilter(chance,i) == 2){// если комбинация совпадает 
