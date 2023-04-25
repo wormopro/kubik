@@ -15,7 +15,7 @@ if (countPlayers == 0) {
     //Добавить имя игрока
     let NamePromt = prompt('Игрок #' + i + 'Как вас величать ?');
     //Создать "количиство X" обектов с свойствами игроков
-    objPlayers[`player${i}`] = createPlayers(i, NamePromt, 0, inGame = false, barell = false);
+    objPlayers[`player${i}`] = createPlayers(i, NamePromt, 0, inGame = false, barell = false, NumberAttempt = 0, combustionPoints = 0);
   };
 
   //Делает "строку" из обектов с игроками
@@ -71,7 +71,22 @@ save.addEventListener('click', () => {
     localStorage.setItem('score', scoreResult); //Записать сложеные очки в память
   } else {
     localStorage.setItem('score', score); //Записать очки если null
-  }
+  };
+
+  //Залезть на бочку
+  let jsonObjPlayers = JSON.parse(localStorage.getItem('players')); //достать из памяти (players "JsonString") и сделать обектом
+  let calcTotalScore = jsonObjPlayers[`player${localStorage.getItem('walks')}`].score + +localStorage.getItem('score'); //Подсчитать общий счет
+  if (calcTotalScore >= 880 && jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == false) {
+    jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell = true; //изменить бочку "barell" на true
+    localStorage.setItem('players', JSON.stringify(jsonObjPlayers)); //сделать json и перезаписать в память
+    console.log('на бочке');
+  };  
+  //Если на бочки и насобирал от 120ти ПОБЕДА
+  if(jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == true){
+    if(localStorage.getItem('score') >= 120){
+      alert('победа');
+    };
+  };
 
   //меняет статус кубика с 1 на 2
   for (let i = 0; i < 5; i++) {
@@ -86,22 +101,6 @@ save.addEventListener('click', () => {
 
     };
   };
-
-  //Бочка
-  let jsonObjPlayers = JSON.parse(localStorage.getItem('players')); //достать из памяти (players "JsonString") и сделать обектом
-  let calcTotalScore = jsonObjPlayers[`player${localStorage.getItem('walks')}`].score + +localStorage.getItem('score'); //Посчитать общий счет
-  //Залез на бочку
-  if (calcTotalScore >= 880 && jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == false) {
-    jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell = true; //именить бочку "barell" на true
-    localStorage.setItem('players', JSON.stringify(jsonObjPlayers)); //сделать json и перезаписать в память
-    console.log('на бочке');
-  };
-
-  //Выграл или упал с бочки
-  if (jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == true) {
-    console.log('на бочке true');
-  }
-  console.log(calcTotalScore, 'Общий счет score и playerScore');
   
   nameScorePlayers(totalScore); //выводит имя игрока и счет на данный момент
 });
@@ -220,6 +219,8 @@ function createPlayers(id, name, score, inGame, barell) {
     score,
     inGame,
     barell,
+    NumberAttempt,
+    combustionPoints,
   }
 };
 
