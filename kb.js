@@ -125,7 +125,7 @@ finish.addEventListener('click', () => {
     //Бочка
     let calcTotalScore = +jsonObjPlayers[`player${walks}`].score + score; //сложить все очки
     //Если набрано 880+
-    if(+calcTotalScore >= 10 && jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == false ){
+    if(+calcTotalScore >= 880 && jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == false ){
       jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell = true; //На бочке
       localStorage.setItem('players', JSON.stringify(jsonObjPlayers));  //сделать json и перезаписать в память
       localStorage.removeItem('score');
