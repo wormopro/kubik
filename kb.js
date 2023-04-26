@@ -15,7 +15,7 @@ if (countPlayers == 0) {
     //Добавить имя игрока
     let NamePromt = prompt('Игрок #' + i + 'Как вас величать ?');
     //Создать "количиство X" обектов с свойствами игроков
-    objPlayers[`player${i}`] = createPlayers(i, NamePromt, 0, inGame = false, barell = false, NumberAttempt = 0, combustionPoints = 0);
+    objPlayers[`player${i}`] = createPlayers(i, NamePromt, 0, inGame = false, barell = false, NumberAttempt = 0, combustionPoints = 880);
   };
 
   //Делает "строку" из обектов с игроками
@@ -73,21 +73,6 @@ save.addEventListener('click', () => {
     localStorage.setItem('score', score); //Записать очки если null
   };
 
-  //Залезть на бочку
-  let jsonObjPlayers = JSON.parse(localStorage.getItem('players')); //достать из памяти (players "JsonString") и сделать обектом
-  let calcTotalScore = jsonObjPlayers[`player${localStorage.getItem('walks')}`].score + +localStorage.getItem('score'); //Подсчитать общий счет
-  if (calcTotalScore >= 880 && jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == false) {
-    jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell = true; //изменить бочку "barell" на true
-    localStorage.setItem('players', JSON.stringify(jsonObjPlayers)); //сделать json и перезаписать в память
-    console.log('на бочке');
-  };  
-  //Если на бочки и насобирал от 120ти ПОБЕДА
-  if(jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == true){
-    if(localStorage.getItem('score') >= 120){
-      alert('победа');
-    };
-  };
-
   //меняет статус кубика с 1 на 2
   for (let i = 0; i < 5; i++) {
     kosti[i] = document.querySelector(`#kub${i+1}`);
@@ -115,7 +100,6 @@ finish.addEventListener('click', () => {
 
   //Если игрок не в игре
   if (inGame() == false) {
-    //Если набронно 105 или больше изменить inGame на true
     if (localStorage.getItem('score') >= 1000) {
       alert("ты набрал 1000 сучка - это пэрэмога"); 
     }
@@ -138,10 +122,51 @@ finish.addEventListener('click', () => {
   }
   //Если игрок в игре
   else {
+    //Бочка
+    let calcTotalScore = +jsonObjPlayers[`player${walks}`].score + score; //сложить все очки
+    //Если набрано 880+
+    if(+calcTotalScore >= 10 && jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == false ){
+      jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell = true; //На бочке
+      localStorage.setItem('players', JSON.stringify(jsonObjPlayers));  //сделать json и перезаписать в память
+      localStorage.removeItem('score');
+      nextPlayer(); //Поменять игрока walks = X
+      alert('На бочке');
+      document.location.reload();
+    //Если набрано 120 победа
+    }else if(jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == true && score >= 120){
+      alert('Победа');
+      localStorage.clear();
+      document.location.reload(); //перезагрузить страницу
+    }
+    //Если набрано меньше 120
+    else if(jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell == true && score < 120){ //на бочке не набрал 120
+      if(+jsonObjPlayers[`player${localStorage.getItem('walks')}`].NumberAttempt < 3){
+        +jsonObjPlayers[`player${localStorage.getItem('walks')}`].NumberAttempt++; //Увеличивает счетчик
+        //Если неудача на 3тяй попытки
+        if(+jsonObjPlayers[`player${localStorage.getItem('walks')}`].NumberAttempt == 3){
+          jsonObjPlayers[`player${localStorage.getItem('walks')}`].barell = false; 
+          jsonObjPlayers[`player${localStorage.getItem('walks')}`].NumberAttempt = 0;
+          let minusResult = +jsonObjPlayers[`player${localStorage.getItem('walks')}`].combustionPoints - 110;
+          jsonObjPlayers[`player${localStorage.getItem('walks')}`].combustionPoints = minusResult;
+          jsonObjPlayers[`player${localStorage.getItem('walks')}`].score = jsonObjPlayers[`player${localStorage.getItem('walks')}`].combustionPoints;
+          alert('Падение с бочки',minusResult);
+          document.location.reload(); //перезагрузить страницу
+        };
+        localStorage.setItem('players', JSON.stringify(jsonObjPlayers));  //сделать json и перезаписать в память
+        alert(+jsonObjPlayers[`player${localStorage.getItem('walks')}`].NumberAttempt);
+        localStorage.removeItem('score');
+        nextPlayer(); //Поменять игрока walks = X
+        document.location.reload(); //перезагрузить страницу
+      };
+    }
+    else{
+    alert(calcTotalScore);
+
     //изменить счет игрока в обекте (player{x})
     jsonObjPlayers[`player${walks}`].score += score;
+    alert(jsonObjPlayers[`player${walks}`].score);
 
-  //Скидывание игрока 
+    //Скидывание игрока 
     for (i = 1; i <= countPlayers; i++){ 
       if(i != walks){ //Сравниваем что бы номер игрока не равнялся теккущему
         if(jsonObjPlayers[`player${walks}`].score == jsonObjPlayers[`player${i}`].score){ //Если счет совпал
@@ -159,7 +184,8 @@ finish.addEventListener('click', () => {
     } else {
       nextPlayer(); //Поменять игрока walks = X
       document.location.reload(); //перезагрузить страницу
-    }
+    };
+    };
   };
 
 });
