@@ -62,7 +62,7 @@ save.addEventListener('click', () => {
     };
   };
   let score = arrayFilter(setCube); //Подсчитать очки
-  if (score != 0){ //если набрал 0 очков ничего не делаем и кнопка не работает
+  //if (score != 0){ //если набрал 0 очков ничего не делаем и кнопка не работает
   //Отвечает за score в памяти
   if (localStorage.getItem('score')) {
     let scoreInMemory = +localStorage.getItem('score'); //Очки в памяти
@@ -85,7 +85,7 @@ save.addEventListener('click', () => {
     }
 
     };
-  };
+ // };
   
   nameScorePlayers(totalScore); //выводит имя игрока и счет на данный момент
 });
@@ -164,7 +164,7 @@ finish.addEventListener('click', () => {
 
     //изменить счет игрока в обекте (player{x})
     jsonObjPlayers[`player${walks}`].score += score;
-    alert(jsonObjPlayers[`player${walks}`].score);
+    
 
     //Скидывание игрока 
     for (i = 1; i <= countPlayers; i++){ 
@@ -372,7 +372,7 @@ if(dice.some(bone => bone == 1) || dice.some(bone => bone == 5)) {
       kosti[i] = document.querySelector(`#kub${i+1}`);
         if (kosti[i].dataset.status == 0) {
             kosti[i].dataset.status = 1;
-            document.getElementById(`myImage${i + 1}`).src=`./images/${dice[randDice]}_dots.png`; //Добавляет картинки кубики
+            document.getElementById(`myImage${i + 1}`).src=`./images/${randDice}_dots.png`; //Добавляет картинки кубики
         }
       }
     for(i = 1;i < 7;i++){
